@@ -1,0 +1,9 @@
+rootProject.name = 'tass-microservice'
+include 'product'
+include 'order'
+include 'warehouse'
+include 'payment'
+//include 'api-registry'
+//include 'api-log'
+include 'common'
+
