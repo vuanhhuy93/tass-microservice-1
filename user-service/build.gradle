@@ -43,9 +43,6 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.2'
 }
 dependencyManagement {
