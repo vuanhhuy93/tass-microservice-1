@@ -4,6 +4,6 @@ include 'order'
 include 'warehouse'
 include 'payment'
 //include 'api-registry'
-//include 'api-log'
+include 'user-service'
 include 'common'
 

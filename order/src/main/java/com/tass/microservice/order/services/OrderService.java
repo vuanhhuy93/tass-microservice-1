@@ -6,6 +6,7 @@ import com.tass.common.model.BaseResponseV2;
 import com.tass.common.model.ERROR;
 import com.tass.common.model.constans.ORDER;
 import com.tass.common.model.dto.product.ProductDTO;
+import com.tass.common.model.userauthen.UserDTO;
 import com.tass.microservice.order.connector.ProductConnector;
 import com.tass.microservice.order.entities.Order;
 import com.tass.microservice.order.model.request.CreatedOrderRequest;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 @Log4j2
 @Service
-public class OrderService {
+public class OrderService extends BaseService {
     @Autowired
     OrderRepository orderRepository;
 
@@ -37,6 +38,8 @@ public class OrderService {
         log.info("created order with request {}" , request);
 
         // step 1 : validate request
+
+        UserDTO userDTO = getUserDTO();
 
         if (request.getProductId() < 1 || request.getTotal() < 1){
             throw new ApplicationException(ERROR.INVALID_PARAM);
@@ -62,7 +65,7 @@ public class OrderService {
         Order order = new Order();
 
         order.setIsSuccess(ORDER.SUCCESS_STATUS.FAIL);
-        order.setUserId(1L);
+        order.setUserId(userDTO.getUserId());
         order.setStatus(ORDER.STATUS.CREATED);
         order.setProductId(request.getProductId());
         order.setTotalItems(request.getTotal());
