@@ -5,8 +5,10 @@ import com.tass.common.model.BaseResponse;
 import com.tass.common.model.BaseResponseV2;
 import com.tass.common.model.ERROR;
 import com.tass.common.model.constans.ORDER;
+import com.tass.common.model.dto.order.OrderDTO;
 import com.tass.common.model.dto.product.ProductDTO;
 import com.tass.common.model.userauthen.UserDTO;
+import com.tass.common.utils.JsonHelper;
 import com.tass.microservice.order.connector.ProductConnector;
 import com.tass.microservice.order.entities.Order;
 import com.tass.microservice.order.model.request.CreatedOrderRequest;
@@ -72,8 +74,16 @@ public class OrderService extends BaseService {
 
         orderRepository.save(order);
 
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderId(order.getId());
+        orderDTO.setStatus(order.getStatus());
+        orderDTO.setProductId(order.getProductId());
+        orderDTO.setTotal(order.getTotalItems());
         // send event created order
-        resdisPusherMessageService.sendMessage("created order with id" + order.getId() , channelTopic);
+
+        String message = JsonHelper.toString(orderDTO);
+
+        resdisPusherMessageService.sendMessage(message , channelTopic);
 
         return new BaseResponse();
     }
