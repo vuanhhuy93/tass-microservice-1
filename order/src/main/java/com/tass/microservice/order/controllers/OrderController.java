@@ -1,5 +1,6 @@
 package com.tass.microservice.order.controllers;
 
+import com.tass.common.customanotation.RequireUserLogin;
 import com.tass.common.model.ApplicationException;
 import com.tass.common.model.BaseResponse;
 import com.tass.microservice.order.model.request.CreatedOrderRequest;
@@ -18,6 +19,7 @@ public class OrderController {
     OrderService orderService ;
 
     @PostMapping
+    @RequireUserLogin
     public BaseResponse createdOrder(@RequestBody CreatedOrderRequest request) throws
         ApplicationException{
         return orderService.createdOrder(request);

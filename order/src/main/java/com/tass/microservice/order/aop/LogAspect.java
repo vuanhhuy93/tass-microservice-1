@@ -1,5 +1,9 @@
 package com.tass.microservice.order.aop;
 
+import com.tass.common.customanotation.RequireUserLogin;
+import com.tass.common.model.ApplicationException;
+import com.tass.common.model.BaseResponse;
+import com.tass.common.model.ERROR;
 import com.tass.common.model.constans.AUTHENTICATION;
 import com.tass.common.model.userauthen.UserDTO;
 import com.tass.common.utils.ThreadLocalCollection;
@@ -14,6 +18,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
@@ -49,6 +54,22 @@ public class LogAspect {
             } catch (Exception e){
                 e.printStackTrace();
             }
+
+        }
+
+        try {
+            MethodSignature signature = (MethodSignature) pjp.getSignature();
+
+            RequireUserLogin requireUserLogin = signature.getMethod().getAnnotation(RequireUserLogin.class);
+
+            if (requireUserLogin != null && requireUserLogin.value()){
+                if (ThreadLocalCollection.getUserActionLog() == null){
+                    BaseResponse response = new BaseResponse();
+                    response.setCode(ERROR.USER_NOT_FOUND);
+                    return response;
+                }
+            }
+        } catch (Exception e){
 
         }
         Object output = null;
