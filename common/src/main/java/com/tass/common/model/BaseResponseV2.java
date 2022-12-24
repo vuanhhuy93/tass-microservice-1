@@ -16,4 +16,10 @@ public class BaseResponseV2<T> {
     public boolean isSuccess(){
         return this.code == ERROR.SUCCESS.code;
     }
+
+    public BaseResponseV2(T data) {
+        this.code = ERROR.SUCCESS.code;
+        this.message = "SUCCESS";
+        this.data = data;
+    }
 }

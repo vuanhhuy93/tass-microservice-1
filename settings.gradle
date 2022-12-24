@@ -3,7 +3,7 @@ include 'product'
 include 'order'
 include 'warehouse'
 include 'payment'
-//include 'api-registry'
+include 'api-gw'
 include 'user-service'
 include 'common'
 

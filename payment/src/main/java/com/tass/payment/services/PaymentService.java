@@ -22,8 +22,6 @@ public class PaymentService {
             this.handleOrderEventFail(orderDTO);
             return;
         }
-
-
     }
 
     public void handleOrderEventCreated(OrderDTO orderDTO){}
