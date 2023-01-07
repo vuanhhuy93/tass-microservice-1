@@ -1,0 +1,1 @@
+docker build --no-cache tass/order:1.0 .
