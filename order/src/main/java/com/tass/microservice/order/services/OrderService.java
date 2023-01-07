@@ -33,6 +33,9 @@ public class OrderService extends BaseService {
     ChannelTopic channelTopic;
 
     @Autowired
+    RabbitMqSendMessageService rabbitMqSendMessageService;
+
+    @Autowired
     ResdisPusherMessageService resdisPusherMessageService;
 
     public BaseResponse createdOrder(CreatedOrderRequest request) throws ApplicationException{
@@ -83,7 +86,8 @@ public class OrderService extends BaseService {
 
         String message = JsonHelper.toString(orderDTO);
 
-        resdisPusherMessageService.sendMessage(message , channelTopic);
+        rabbitMqSendMessageService.sendMessageOrder(message , "created");
+//        resdisPusherMessageService.sendMessage(message , channelTopic);
 
         return new BaseResponse();
     }

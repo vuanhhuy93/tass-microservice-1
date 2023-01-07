@@ -54,6 +54,30 @@ public class Oauth2AuthorizationFilter extends BasicAuthenticationFilter {
 
         UserLoginDTO userLoginDTOObject = userLoginDTO.get();
 
+
+        List<Role> roles = userLoginDTOObject.get;
+
+        String uri = request.getUri;
+
+        AntMatcher adt = new Antpachmatcer;
+        bool match = false;
+        for(Role role : roles){
+
+            if(adt.matcher(role.getURi , uri)){
+                match = true;
+                break;
+            }
+        }
+
+        if (!math){
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(HttpStatus.FORBIDDEN.value());
+            return;
+        }
+
+
+
         UserDetailExtend userDetailExtend = new UserDetailExtend(userLoginDTOObject);
 
         TassUserAuthentication tassUserAuthentication = new TassUserAuthentication(userDetailExtend);
