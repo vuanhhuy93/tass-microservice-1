@@ -17,6 +17,12 @@ public enum ERROR {
     // PRODUCT ERROR
 
     PRODUCT_NOT_ACTIVE(200 , "product is not active" , "PRODUCT_NOT_ACTIVE"),
+
+
+
+    // warehouse start 3xx
+    TOTAL_PRODUCT_INVALID(300, "product total is invalid", "TOTAL_INVALID") ,
+    WARE_HOUSE_ORDER_TRANSACTION_INVALID(3001 , "transaction id is invalid", "TRANS_ID_INVALID"),
     ;
     public int code;
     public String errorCode;

@@ -29,4 +29,14 @@ public class Order {
 
     private  int totalItems;
 
+    private Integer paymentStatus;
+
+    private Integer warehouseStatus;
+
+    @Column(name =  "warehouse_trans_id")
+    private Long warehouseTransId;
+
+    @Column(name = "payment_trans_id")
+    private Long paymentTransId;
+
 }
